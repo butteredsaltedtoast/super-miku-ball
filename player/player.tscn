@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://1u0smn0lybkw"]
+
+[ext_resource type="Script" uid="uid://b86xjhgib6tnk" path="res://player/player.gd" id="1_rkbax"]
+[ext_resource type="Texture2D" uid="uid://b5qyvup0m8xdj" path="res://icon.svg" id="2_g1dw6"]
+[ext_resource type="PackedScene" uid="uid://btmp35koj5qr4" path="res://player/yoyo.tscn" id="3_g1dw6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o33cc"]
+size = Vector2(83, 80)
+
+[node name="Player" type="CharacterBody2D" unique_id=1639121829]
+script = ExtResource("1_rkbax")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=231834534]
+scale = Vector2(0.625, 0.625)
+texture = ExtResource("2_g1dw6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=732301362]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_o33cc")
+
+[node name="YoyoPivot" type="Node2D" parent="." unique_id=1099705098]
+
+[node name="Yoyo" parent="YoyoPivot" unique_id=549741976 instance=ExtResource("3_g1dw6")]
+position = Vector2(80, 0)
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=827351713]
+process_callback = 0
+position_smoothing_enabled = true
