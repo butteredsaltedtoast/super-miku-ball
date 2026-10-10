@@ -43,7 +43,7 @@ func take_damage(damage: float) -> void:
 	if invincible:
 		return
 	health -= damage
-	#print("health: ", health)
+	print("took damage. health: ", health)
 	invincible = true
 	$Timer.start()
 
