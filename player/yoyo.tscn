@@ -1,10 +1,12 @@
 [gd_scene format=3 uid="uid://btmp35koj5qr4"]
 
+[ext_resource type="Script" uid="uid://c754nnptievo8" path="res://player/yoyo.gd" id="1_374wj"]
 [ext_resource type="Texture2D" uid="uid://b5qyvup0m8xdj" path="res://icon.svg" id="1_uf76s"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o33cc"]
 
 [node name="Yoyo" type="Area2D" unique_id=549741976]
+script = ExtResource("1_374wj")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1353460735]
 scale = Vector2(0.15625, 0.15625)
@@ -12,3 +14,5 @@ texture = ExtResource("1_uf76s")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1351462715]
 shape = SubResource("RectangleShape2D_o33cc")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
