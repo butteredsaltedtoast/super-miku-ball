@@ -29,7 +29,10 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o33cc"]
-size = Vector2(83, 80)
+size = Vector2(17, 107)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_38vvf"]
+size = Vector2(30, 109)
 
 [node name="Player" type="CharacterBody2D" unique_id=1639121829]
 script = ExtResource("1_rkbax")
@@ -46,7 +49,7 @@ scale = Vector2(0.625, 0.625)
 texture = ExtResource("2_g1dw6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=732301362]
-position = Vector2(-0.5, 0)
+position = Vector2(-0.5, -7.5)
 shape = SubResource("RectangleShape2D_o33cc")
 
 [node name="YoyoPivot" type="Node2D" parent="." unique_id=1099705098]
@@ -78,3 +81,14 @@ offset_right = 229.0
 offset_bottom = 23.0
 scale = Vector2(1.5, 1.5)
 text = "Level would mayhaps go here"
+
+[node name="Hurtbox" type="Area2D" parent="." unique_id=778289037]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=1320940085]
+position = Vector2(0, -7.5)
+shape = SubResource("RectangleShape2D_38vvf")
+
+[node name="Timer" type="Timer" parent="." unique_id=62535615]
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
