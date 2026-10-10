@@ -19,11 +19,11 @@ func _physics_process(delta: float) -> void:
 		visible = true
 	move_and_slide()
 
-func take_damage(damage: float, hitAngle: float) -> void:
+func take_damage(damage: float, parent: Node2D, speed : float = 1.0) -> void:
 	if (cooldownTime == dmgCooldown):
 		hp -= damage
 		cooldownTime = 0.0
-		velocity += Vector2(cos(hitAngle + 0.4)*(SPEED + 35),sin(hitAngle + 0.4)*(SPEED + 35))
+		velocity += Vector2(cos(parent.rotation + 0.4)*(SPEED + 35)*speed,sin(parent.rotation + 0.4)*(SPEED + 35)*speed)
 	
 	if(hp <= 0):
 		queue_free()

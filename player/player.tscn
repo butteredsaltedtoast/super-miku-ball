@@ -1,27 +1,43 @@
 [gd_scene format=3 uid="uid://1u0smn0lybkw"]
 
 [ext_resource type="Script" uid="uid://b86xjhgib6tnk" path="res://player/player.gd" id="1_rkbax"]
+[ext_resource type="Texture2D" uid="uid://becm386dk2qn5" path="res://Sprites/PlayerSprites/Spin1.png" id="2_2ieo8"]
 [ext_resource type="Texture2D" uid="uid://b5qyvup0m8xdj" path="res://icon.svg" id="2_g1dw6"]
+[ext_resource type="Texture2D" uid="uid://wal7q4o3gg8p" path="res://Sprites/PlayerSprites/Spin2.png" id="3_ebec5"]
 [ext_resource type="PackedScene" uid="uid://btmp35koj5qr4" path="res://player/yoyo.tscn" id="3_g1dw6"]
-[ext_resource type="Texture2D" uid="uid://cdnx4wmvx2xk4" path="res://Sprites/PlayerSprites/pixil-frame-0.png" id="4_boad6"]
-[ext_resource type="Texture2D" uid="uid://bffq05clt02rn" path="res://Sprites/PlayerSprites/pixil-frame-1.png" id="5_rgyib"]
-[ext_resource type="Texture2D" uid="uid://bh2o5x85l70qc" path="res://Sprites/PlayerSprites/pixil-frame-2.png" id="6_hg6s5"]
-[ext_resource type="Texture2D" uid="uid://duh5egxa6kxoy" path="res://Sprites/PlayerSprites/pixil-frame-3.png" id="7_8t03j"]
+[ext_resource type="Texture2D" uid="uid://26frdoqt4qup" path="res://Sprites/PlayerSprites/Spin3.png" id="4_yllr7"]
+[ext_resource type="Texture2D" uid="uid://2m4ghiy50brw" path="res://Sprites/PlayerSprites/Spin4.png" id="5_kb6p2"]
+[ext_resource type="Texture2D" uid="uid://biysi5b0lmfqo" path="res://Sprites/PlayerSprites/Spin5.png" id="6_wodsf"]
+[ext_resource type="Texture2D" uid="uid://i7uaqxo1e3tv" path="res://Sprites/PlayerSprites/Spin6.png" id="7_32hag"]
+[ext_resource type="Texture2D" uid="uid://creibhfwft801" path="res://Sprites/PlayerSprites/Spin7.png" id="8_tqiix"]
+[ext_resource type="Texture2D" uid="uid://caafqgblixaie" path="res://Sprites/PlayerSprites/Spin8.png" id="9_e7oew"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_w4o6v"]
 animations = [{
 "frames": [{
-"duration": 1.0,
-"texture": ExtResource("4_boad6")
+"duration": 0.5,
+"texture": ExtResource("2_2ieo8")
 }, {
-"duration": 1.0,
-"texture": ExtResource("5_rgyib")
+"duration": 0.5,
+"texture": ExtResource("3_ebec5")
 }, {
-"duration": 1.0,
-"texture": ExtResource("6_hg6s5")
+"duration": 0.5,
+"texture": ExtResource("4_yllr7")
 }, {
-"duration": 1.0,
-"texture": ExtResource("7_8t03j")
+"duration": 0.5,
+"texture": ExtResource("5_kb6p2")
+}, {
+"duration": 0.5,
+"texture": ExtResource("6_wodsf")
+}, {
+"duration": 0.5,
+"texture": ExtResource("7_32hag")
+}, {
+"duration": 0.5,
+"texture": ExtResource("8_tqiix")
+}, {
+"duration": 0.5,
+"texture": ExtResource("9_e7oew")
 }],
 "loop": 1,
 "name": &"default",
@@ -42,6 +58,7 @@ texture_filter = 1
 position = Vector2(0, -15)
 scale = Vector2(5, 5)
 sprite_frames = SubResource("SpriteFrames_w4o6v")
+frame_progress = 0.7952058
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=231834534]
 visible = false
@@ -57,7 +74,7 @@ rotation = 0.7853982
 
 [node name="Rope" type="Sprite2D" parent="YoyoPivot" unique_id=1550576609]
 position = Vector2(40, 0)
-scale = Vector2(0.62, 0.08)
+scale = Vector2(0.388, 0.05)
 texture = ExtResource("2_g1dw6")
 
 [node name="Yoyo" parent="YoyoPivot" unique_id=549741976 instance=ExtResource("3_g1dw6")]
@@ -65,7 +82,6 @@ position = Vector2(80, 0)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=827351713]
 process_callback = 0
-position_smoothing_enabled = true
 
 [node name="Gooey (GUI)" type="Control" parent="Camera2D" unique_id=852686653]
 layout_mode = 3

@@ -24,3 +24,6 @@ texture = SubResource("NoiseTexture2D_wvca5")
 
 [node name="Enemy" parent="." unique_id=1014679973 instance=ExtResource("2_qpncq")]
 position = Vector2(334, 105)
+
+[node name="Enemy2" parent="." unique_id=1253442383 instance=ExtResource("2_qpncq")]
+position = Vector2(-234, 215)
