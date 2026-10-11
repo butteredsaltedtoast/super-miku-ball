@@ -2,8 +2,11 @@
 
 [ext_resource type="PackedScene" uid="uid://1u0smn0lybkw" path="res://player/player.tscn" id="1_y4kg7"]
 [ext_resource type="PackedScene" uid="uid://b35xhio7qch3f" path="res://enemies/enemy.tscn" id="2_qpncq"]
+[ext_resource type="Texture2D" uid="uid://cew0f2jvq1cue" path="res://Sprites/UI/EmptyEXPBar.png" id="3_h7b1e"]
 [ext_resource type="Script" uid="uid://doil4lbse1hkc" path="res://levels/progress_bar.gd" id="3_qpncq"]
+[ext_resource type="Texture2D" uid="uid://cu7vdoh6jk3y4" path="res://Sprites/UI/FullEXPBar.png" id="4_dqqgg"]
 [ext_resource type="PackedScene" uid="uid://ckhqk24xwa3y7" path="res://enemies/nutcracker.tscn" id="4_rjpa6"]
+[ext_resource type="Script" uid="uid://b5vxvpmnfs7f2" path="res://levels/xp_bar.gd" id="5_dqqgg"]
 [ext_resource type="Script" uid="uid://irgrckwqv56x" path="res://levels/spawner.gd" id="5_ijwil"]
 
 [sub_resource type="Gradient" id="Gradient_m1orj"]
@@ -50,6 +53,15 @@ grow_vertical = 2
 text = "Your string broke! Press R to restart."
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="XPBar" type="TextureProgressBar" parent="UI" unique_id=1511770443]
+offset_top = 75.0
+offset_right = 96.0
+offset_bottom = 115.0
+scale = Vector2(4, 4)
+texture_under = ExtResource("3_h7b1e")
+texture_progress = ExtResource("4_dqqgg")
+script = ExtResource("5_dqqgg")
 
 [node name="Spawner" type="Node2D" parent="." unique_id=607718019]
 script = ExtResource("5_ijwil")

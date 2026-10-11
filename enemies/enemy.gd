@@ -3,7 +3,7 @@ extends CharacterBody2D
 class_name Enemy
 
 const SPEED : float = 100.0
-@export var maxHP : float = 100.0
+@export var maxHP : float = 75.0
 var hp : float = maxHP
 var dmgCooldown : float = 0.3
 var cooldownTime : float = dmgCooldown
@@ -31,5 +31,6 @@ func take_damage(damage: float, parent: Node2D, speed : float = 1.0) -> void:
 		cooldownTime = 0.0
 		velocity += Vector2(cos(parent.rotation + 0.4)*(SPEED + 35)*speed,sin(parent.rotation + 0.4)*(SPEED + 35)*speed)
 	
-	if(hp <= 0):
-		queue_free()
+		if(hp <= 0):
+			GameState.add_xp(1)
+			queue_free()

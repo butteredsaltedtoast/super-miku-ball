@@ -21,6 +21,9 @@ var string_frames = [preload("res://Sprites/PlayerSprites/YoyoSprites/String1.pn
 var string_time : float = 0.0
 func _ready() -> void:
 	GameState.player = self
+	GameState.level = 1
+	GameState.xp = 0
+	GameState.xp_to_level = 10
 	anim_sprite.play("default")
 
 func _physics_process(delta: float) -> void:
