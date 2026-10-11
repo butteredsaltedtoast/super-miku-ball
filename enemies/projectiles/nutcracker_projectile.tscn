@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://svf4yucqulqg"]
+
+[ext_resource type="PackedScene" uid="uid://d37yi2pq0aky" path="res://enemies/projectiles/projectile.tscn" id="1_51ppj"]
+[ext_resource type="Texture2D" uid="uid://0mjnvq4xbxqh" path="res://Sprites/EnemySprites/NutcrackerProjectile.png" id="2_ctpje"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_278qv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_ctpje")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ctpje"]
+radius = 16.0
+
+[node name="Projectile" unique_id=2133379518 instance=ExtResource("1_51ppj")]
+
+[node name="AnimatedSprite2D" parent="." index="0" unique_id=1658062276]
+scale = Vector2(3.833333, 3.833333)
+sprite_frames = SubResource("SpriteFrames_278qv")
+
+[node name="CollisionShape2D" parent="." index="1" unique_id=1370370752]
+shape = SubResource("CircleShape2D_ctpje")

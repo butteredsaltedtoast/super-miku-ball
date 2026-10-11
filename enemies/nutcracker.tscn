@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://ckhqk24xwa3y7"]
+
+[ext_resource type="PackedScene" uid="uid://b35xhio7qch3f" path="res://enemies/enemy.tscn" id="1_h6nvb"]
+[ext_resource type="Script" uid="uid://dntreb7g1ynfh" path="res://enemies/nutcracker.gd" id="2_h6nvb"]
+[ext_resource type="Texture2D" uid="uid://ca5occh4or56p" path="res://Sprites/EnemySprites/Nutcracker1.png" id="3_2rj42"]
+[ext_resource type="PackedScene" uid="uid://svf4yucqulqg" path="res://enemies/projectiles/nutcracker_projectile.tscn" id="3_278qv"]
+[ext_resource type="Texture2D" uid="uid://vn4ywvgcimms" path="res://Sprites/EnemySprites/Nutcracker2.png" id="4_sd4sv"]
+[ext_resource type="Texture2D" uid="uid://tptkcuwobjv7" path="res://Sprites/EnemySprites/Nutcracker3.png" id="5_fr6hw"]
+[ext_resource type="Texture2D" uid="uid://ss17y414yjio" path="res://Sprites/EnemySprites/Nutcracker4.png" id="6_i18o7"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nfcin"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_2rj42")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_sd4sv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_fr6hw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_i18o7")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Enemy" unique_id=1014679973 instance=ExtResource("1_h6nvb")]
+script = ExtResource("2_h6nvb")
+projectile_scene = ExtResource("3_278qv")
+
+[node name="Sprite2D" parent="." index="0" unique_id=836537040]
+sprite_frames = SubResource("SpriteFrames_nfcin")
+
+[node name="CollisionShape2D" parent="." index="1" unique_id=1008037828]
+position = Vector2(0.41666698, 6.6666665)
+
+[node name="ShootTimer" type="Timer" parent="." index="2" unique_id=1373079390]
+wait_time = 2.0
+autostart = true
+
+[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]

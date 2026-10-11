@@ -3,6 +3,8 @@
 [ext_resource type="PackedScene" uid="uid://1u0smn0lybkw" path="res://player/player.tscn" id="1_y4kg7"]
 [ext_resource type="PackedScene" uid="uid://b35xhio7qch3f" path="res://enemies/enemy.tscn" id="2_qpncq"]
 [ext_resource type="Script" uid="uid://doil4lbse1hkc" path="res://levels/progress_bar.gd" id="3_qpncq"]
+[ext_resource type="PackedScene" uid="uid://ckhqk24xwa3y7" path="res://enemies/nutcracker.tscn" id="4_rjpa6"]
+[ext_resource type="Script" uid="uid://irgrckwqv56x" path="res://levels/spawner.gd" id="5_ijwil"]
 
 [sub_resource type="Gradient" id="Gradient_m1orj"]
 colors = PackedColorArray(0.31431612, 0.31431612, 0.3143161, 1, 0.48570347, 0.48570353, 0.48570347, 1)
@@ -23,12 +25,6 @@ texture = SubResource("NoiseTexture2D_wvca5")
 
 [node name="Player" parent="." unique_id=1639121829 instance=ExtResource("1_y4kg7")]
 
-[node name="Enemy" parent="." unique_id=1014679973 instance=ExtResource("2_qpncq")]
-position = Vector2(334, 105)
-
-[node name="Enemy2" parent="." unique_id=1253442383 instance=ExtResource("2_qpncq")]
-position = Vector2(-234, 215)
-
 [node name="UI" type="CanvasLayer" parent="." unique_id=465172807]
 
 [node name="ProgressBar" type="ProgressBar" parent="UI" unique_id=1497411157]
@@ -40,3 +36,27 @@ max_value = 1.0
 value = 1.0
 show_percentage = false
 script = ExtResource("3_qpncq")
+
+[node name="DeathLabel" type="Label" parent="UI" unique_id=1741158854]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -200.0
+offset_bottom = -200.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Your string broke! Press R to restart."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Spawner" type="Node2D" parent="." unique_id=607718019]
+script = ExtResource("5_ijwil")
+enemy_scenes = Array[PackedScene]([ExtResource("2_qpncq"), ExtResource("4_rjpa6")])
+
+[node name="Timer" type="Timer" parent="Spawner" unique_id=871362567]
+wait_time = 1.5
+autostart = true
+
+[connection signal="timeout" from="Spawner/Timer" to="Spawner" method="_on_timer_timeout"]

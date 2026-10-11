@@ -24,14 +24,17 @@ func _ready() -> void:
 	anim_sprite.play("default")
 
 func _physics_process(delta: float) -> void:
-	if dead:
+	if dead and Input.is_action_just_pressed("restart"):
+		get_tree().reload_current_scene()
+		return
+	elif dead:
 		return
 	var direction := Input.get_vector("arrow_left", "arrow_right", "arrow_up", "arrow_down")
 	velocity = velocity.move_toward(direction * SPEED, ACCEL * delta)
 	$YoyoPivot.rotation += (yoyo_speed - 10 * min(extension_time,6.0)) * delta * PI/ 40
 	$YoyoPivot.rotation = wrapf($YoyoPivot.rotation, 0, TAU)
 	spinSpeed = (yoyo_speed - 10 * min(extension_time,6.0))/yoyo_speed
-	if yoyo.position.x == 80.0:
+	if yoyo.position.x == 80.0 and direction != Vector2.ZERO:
 		anim_sprite.speed_scale = 1.0
 		if abs(direction.x) > abs(direction.y):
 			if direction.x > 0:
@@ -62,8 +65,8 @@ func _physics_process(delta: float) -> void:
 	
 	yoyo.position.x = move_toward(yoyo.position.x, target_length, yoyo_speed * delta * retract_speed * health / 4)
 	rope.region_rect = Rect2(0, 0, yoyo.position.x / rope.scale.x, 5)
-	ropeShape.shape.size = Vector2(yoyo.position.x / 3, 5)
-	ropeShape.position.x = yoyo.position.x / 6
+	ropeShape.shape.size = Vector2((yoyo.position.x - 30) / 3, 5)
+	ropeShape.position.x = (yoyo.position.x - 30) / 6
 	string_time += delta
 	rope.texture = string_frames[int(string_time * 10) % 4]
 	move_and_slide()
@@ -74,11 +77,13 @@ func _physics_process(delta: float) -> void:
 			take_damage(1.0)
 	var ropehits = ropeCollide.get_overlapping_bodies()
 	for body in ropehits:
+		if yoyo.overlaps_body(body):
+			continue
 		if "enemies" in body.get_groups():
 			take_damage(2.0)
 	
 func take_damage(damage: float) -> void:
-	if invincible:
+	if invincible or dead:
 		return
 	health -= damage
 	if health <= 0:
@@ -86,6 +91,7 @@ func take_damage(damage: float) -> void:
 		$YoyoPivot.visible = false
 		yoyo.set_deferred("monitoring", false)
 		anim_sprite.play("death")
+		create_tween().tween_property(get_tree().current_scene.get_node("%DeathLabel"), "modulate:a", 1.0, 1.0)
 		return
 	print("took damage. health: ", health)
 	invincible = true

@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+class_name Enemy
+
 const SPEED : float = 100.0
 @export var maxHP : float = 100.0
 var hp : float = maxHP
