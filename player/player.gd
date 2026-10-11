@@ -4,8 +4,8 @@ const SPEED : float = 300.0
 const ACCEL : float = 1500.0
 var yoyo_speed : float = 100.0
 var target_length : float = 80.0
-var health : float = 5.0
-@export var maxHealth : float = 5.0
+@export var maxHealth : float = 10.0
+var health : float = maxHealth
 var dead = false
 var retract_speed : float = 1.0
 var invincible = false
@@ -13,7 +13,8 @@ var extension_time : float = 0.0
 var is_extended = false
 var spinSpeed : float = 1.0
 @onready var anim_sprite = $AnimatedSprite2D
-@onready var rope = $YoyoPivot/Rope
+@onready var rope = $YoyoPivot/Rope/Rope
+@onready var ropeCollide = $YoyoPivot/Rope/Collide
 @onready var yoyo = $YoyoPivot/Yoyo
 var string_frames = [preload("res://Sprites/PlayerSprites/YoyoSprites/String1.png"), preload("res://Sprites/PlayerSprites/YoyoSprites/String2.png"), preload("res://Sprites/PlayerSprites/YoyoSprites/String3.png"), preload("res://Sprites/PlayerSprites/YoyoSprites/String4.png")]
 var string_time : float = 0.0
@@ -29,7 +30,7 @@ func _physics_process(delta: float) -> void:
 	$YoyoPivot.rotation += (yoyo_speed - 10 * min(extension_time,6.0)) * delta * PI/ 40
 	$YoyoPivot.rotation = wrapf($YoyoPivot.rotation, 0, TAU)
 	spinSpeed = (yoyo_speed - 10 * min(extension_time,6.0))/yoyo_speed
-	if direction != Vector2.ZERO:
+	if yoyo.position.x == 80.0:
 		anim_sprite.speed_scale = 1.0
 		if abs(direction.x) > abs(direction.y):
 			if direction.x > 0:
@@ -58,8 +59,9 @@ func _physics_process(delta: float) -> void:
 		is_extended = false
 		retract_speed = 3.0
 	
-	yoyo.position.x = move_toward(yoyo.position.x, target_length, yoyo_speed * delta * retract_speed)
+	yoyo.position.x = move_toward(yoyo.position.x, target_length, yoyo_speed * delta * retract_speed * health / 4)
 	rope.region_rect = Rect2(0, 0, yoyo.position.x / rope.scale.x, 5)
+	ropeCollide.scale = rope.scale
 	string_time += delta
 	rope.texture = string_frames[int(string_time * 10) % 4]
 	move_and_slide()

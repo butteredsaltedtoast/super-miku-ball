@@ -33,6 +33,7 @@
 [ext_resource type="Texture2D" uid="uid://dysld6gt0sn0u" path="res://Sprites/PlayerSprites/WalkUp3.png" id="29_w7j2h"]
 [ext_resource type="Texture2D" uid="uid://36bc2p3jsxqe" path="res://Sprites/PlayerSprites/WalkUp4.png" id="30_n0b8q"]
 [ext_resource type="Texture2D" uid="uid://cb0461iuit8w5" path="res://Sprites/PlayerSprites/YoyoSprites/String1.png" id="32_5ejfk"]
+[ext_resource type="PackedScene" uid="uid://cfypdyommw1kl" path="res://player/rope.tscn" id="34_jd2rm"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_w4o6v"]
 animations = [{
@@ -184,7 +185,8 @@ shape = SubResource("RectangleShape2D_o33cc")
 [node name="YoyoPivot" type="Node2D" parent="." unique_id=1099705098]
 rotation = 0.7853982
 
-[node name="Rope" type="Sprite2D" parent="YoyoPivot" unique_id=1550576609]
+[node name="Rope3" type="Sprite2D" parent="YoyoPivot" unique_id=1550576609]
+visible = false
 texture_repeat = 2
 scale = Vector2(3, 3)
 texture = ExtResource("32_5ejfk")
@@ -194,8 +196,12 @@ region_enabled = true
 
 [node name="Yoyo" parent="YoyoPivot" unique_id=549741976 instance=ExtResource("3_g1dw6")]
 position = Vector2(80, 0)
+scale = Vector2(3, 3)
+
+[node name="Rope" parent="YoyoPivot" unique_id=67072181 instance=ExtResource("34_jd2rm")]
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=827351713]
+zoom = Vector2(0.9, 0.9)
 process_callback = 0
 
 [node name="Gooey (GUI)" type="Control" parent="Camera2D" unique_id=852686653]

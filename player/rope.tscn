@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://cfypdyommw1kl"]
+
+[ext_resource type="Texture2D" uid="uid://cb0461iuit8w5" path="res://Sprites/PlayerSprites/YoyoSprites/String1.png" id="1_sv1ak"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5rl7g"]
+
+[node name="Rope" type="Node2D" unique_id=67072181]
+
+[node name="Rope" type="Sprite2D" parent="." unique_id=1931706200]
+texture_repeat = 2
+scale = Vector2(3, 3)
+texture = ExtResource("1_sv1ak")
+centered = false
+offset = Vector2(0, -2.5)
+region_enabled = true
+
+[node name="Collide" type="Area2D" parent="." unique_id=1212835771]
+scale = Vector2(3, 3)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collide" unique_id=1677978342]
+shape = SubResource("RectangleShape2D_5rl7g")
