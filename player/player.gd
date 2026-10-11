@@ -16,6 +16,7 @@ var spinSpeed : float = 1.0
 @onready var rope = $YoyoPivot/Rope/Rope
 @onready var ropeCollide = $YoyoPivot/Rope/Collide
 @onready var yoyo = $YoyoPivot/Yoyo
+@onready var ropeShape = $YoyoPivot/Rope/Collide/CollisionShape2D
 var string_frames = [preload("res://Sprites/PlayerSprites/YoyoSprites/String1.png"), preload("res://Sprites/PlayerSprites/YoyoSprites/String2.png"), preload("res://Sprites/PlayerSprites/YoyoSprites/String3.png"), preload("res://Sprites/PlayerSprites/YoyoSprites/String4.png")]
 var string_time : float = 0.0
 func _ready() -> void:
@@ -61,7 +62,8 @@ func _physics_process(delta: float) -> void:
 	
 	yoyo.position.x = move_toward(yoyo.position.x, target_length, yoyo_speed * delta * retract_speed * health / 4)
 	rope.region_rect = Rect2(0, 0, yoyo.position.x / rope.scale.x, 5)
-	ropeCollide.scale = rope.scale
+	ropeShape.shape.size = Vector2(yoyo.position.x / 3, 5)
+	ropeShape.position.x = yoyo.position.x / 6
 	string_time += delta
 	rope.texture = string_frames[int(string_time * 10) % 4]
 	move_and_slide()
@@ -70,6 +72,10 @@ func _physics_process(delta: float) -> void:
 	for body in hits:
 		if "enemies" in body.get_groups():
 			take_damage(1.0)
+	var ropehits = ropeCollide.get_overlapping_bodies()
+	for body in ropehits:
+		if "enemies" in body.get_groups():
+			take_damage(2.0)
 	
 func take_damage(damage: float) -> void:
 	if invincible:
