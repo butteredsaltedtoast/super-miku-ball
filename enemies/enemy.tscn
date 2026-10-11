@@ -1,18 +1,42 @@
 [gd_scene format=3 uid="uid://b35xhio7qch3f"]
 
 [ext_resource type="Script" uid="uid://bxpwgaf8lsfsu" path="res://enemies/enemy.gd" id="1_7frlh"]
-[ext_resource type="Texture2D" uid="uid://b5qyvup0m8xdj" path="res://icon.svg" id="1_fw1ev"]
+[ext_resource type="Texture2D" uid="uid://dw120ufnthmia" path="res://Sprites/EnemySprites/Clown1.png" id="2_07tka"]
+[ext_resource type="Texture2D" uid="uid://b7i1mybo75nv7" path="res://Sprites/EnemySprites/Clown2.png" id="3_3t1x0"]
+[ext_resource type="Texture2D" uid="uid://ddqq5yxfiow2w" path="res://Sprites/EnemySprites/Clown3.png" id="4_epsnb"]
+[ext_resource type="Texture2D" uid="uid://dlotllcpvluxu" path="res://Sprites/EnemySprites/Clown4.png" id="5_4w5fm"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_o33cc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_07tka")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_3t1x0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_epsnb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_4w5fm")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7frlh"]
-size = Vector2(46, 46)
+size = Vector2(23, 50)
 
 [node name="Enemy" type="CharacterBody2D" unique_id=1014679973 groups=["enemies"]]
 script = ExtResource("1_7frlh")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=740641721]
-modulate = Color(1, 0, 0, 1)
-scale = Vector2(0.35937497, 0.35937497)
-texture = ExtResource("1_fw1ev")
+[node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=836537040]
+scale = Vector2(2.1666667, 2.1666672)
+sprite_frames = SubResource("SpriteFrames_o33cc")
+autoplay = "default"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1008037828]
+position = Vector2(7.5, 6)
 shape = SubResource("RectangleShape2D_7frlh")

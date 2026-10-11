@@ -7,7 +7,11 @@ var dmgCooldown : float = 0.3
 var cooldownTime : float = dmgCooldown
 func _physics_process(delta: float) -> void:
 	if GameState.player == null: return
-	velocity = (global_position.direction_to(GameState.player.global_position) * SPEED * delta)+ velocity * (1 - delta)
+	var direction = global_position.direction_to(GameState.player.global_position)
+	if GameState.player.dead:
+		direction *= -1
+	velocity = (direction * SPEED * delta)+ velocity * (1 - delta)
+	$Sprite2D.flip_h = direction.x > 0
 	if (cooldownTime < dmgCooldown):
 		cooldownTime += delta
 		if (fmod(cooldownTime,0.1) < 0.05):

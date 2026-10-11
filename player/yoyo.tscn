@@ -1,16 +1,57 @@
 [gd_scene format=3 uid="uid://btmp35koj5qr4"]
 
 [ext_resource type="Script" uid="uid://c754nnptievo8" path="res://player/yoyo.gd" id="1_374wj"]
-[ext_resource type="Texture2D" uid="uid://b5qyvup0m8xdj" path="res://icon.svg" id="1_uf76s"]
+[ext_resource type="Texture2D" uid="uid://vid1on6jylv0" path="res://Sprites/PlayerSprites/YoyoSprites/Yoyo1.png" id="2_66swp"]
+[ext_resource type="Texture2D" uid="uid://c2fabpcme4tce" path="res://Sprites/PlayerSprites/YoyoSprites/Yoyo2.png" id="3_8npvy"]
+[ext_resource type="Texture2D" uid="uid://bll7arkxviaw6" path="res://Sprites/PlayerSprites/YoyoSprites/Yoyo3.png" id="4_e2im7"]
+[ext_resource type="Texture2D" uid="uid://co5vsygujg35w" path="res://Sprites/PlayerSprites/YoyoSprites/Yoyo4.png" id="5_8pwaf"]
+[ext_resource type="Texture2D" uid="uid://dck2jijtaqhnn" path="res://Sprites/PlayerSprites/YoyoSprites/Yoyo5.png" id="6_xsb5s"]
+[ext_resource type="Texture2D" uid="uid://dr4po01dcg8s4" path="res://Sprites/PlayerSprites/YoyoSprites/Yoyo6.png" id="7_gg2p5"]
+[ext_resource type="Texture2D" uid="uid://b5j05m6ur8tle" path="res://Sprites/PlayerSprites/YoyoSprites/Yoyo7.png" id="8_c51na"]
+[ext_resource type="Texture2D" uid="uid://k4lyofsljnkc" path="res://Sprites/PlayerSprites/YoyoSprites/Yoyo8.png" id="9_b1ul0"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_38vvf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_66swp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_8npvy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_e2im7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_8pwaf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_xsb5s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_gg2p5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_c51na")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_b1ul0")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o33cc"]
+size = Vector2(18, 18)
 
 [node name="Yoyo" type="Area2D" unique_id=549741976]
 script = ExtResource("1_374wj")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1353460735]
-scale = Vector2(0.15625, 0.15625)
-texture = ExtResource("1_uf76s")
+[node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=1631387246]
+scale = Vector2(0.79999995, 0.79999995)
+sprite_frames = SubResource("SpriteFrames_38vvf")
+frame_progress = 0.02600449
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1351462715]
 shape = SubResource("RectangleShape2D_o33cc")

@@ -32,6 +32,7 @@
 [ext_resource type="Texture2D" uid="uid://bj6py6k4o16dh" path="res://Sprites/PlayerSprites/WalkUp2.png" id="28_fmu53"]
 [ext_resource type="Texture2D" uid="uid://dysld6gt0sn0u" path="res://Sprites/PlayerSprites/WalkUp3.png" id="29_w7j2h"]
 [ext_resource type="Texture2D" uid="uid://36bc2p3jsxqe" path="res://Sprites/PlayerSprites/WalkUp4.png" id="30_n0b8q"]
+[ext_resource type="Texture2D" uid="uid://cb0461iuit8w5" path="res://Sprites/PlayerSprites/YoyoSprites/String1.png" id="32_5ejfk"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_w4o6v"]
 animations = [{
@@ -50,9 +51,6 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": ExtResource("6_ge24q")
-}, {
-"duration": 1.0,
-"texture": ExtResource("7_pnw6m")
 }],
 "loop": 0,
 "name": &"death",
@@ -171,7 +169,7 @@ position = Vector2(0, -15)
 scale = Vector2(5, 5)
 sprite_frames = SubResource("SpriteFrames_w4o6v")
 animation = &"death"
-frame = 5
+frame = 4
 frame_progress = 1.0
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=231834534]
@@ -187,9 +185,12 @@ shape = SubResource("RectangleShape2D_o33cc")
 rotation = 0.7853982
 
 [node name="Rope" type="Sprite2D" parent="YoyoPivot" unique_id=1550576609]
-position = Vector2(40, 0)
-scale = Vector2(0.388, 0.05)
-texture = ExtResource("2_g1dw6")
+texture_repeat = 2
+scale = Vector2(3, 3)
+texture = ExtResource("32_5ejfk")
+centered = false
+offset = Vector2(0, -2.5)
+region_enabled = true
 
 [node name="Yoyo" parent="YoyoPivot" unique_id=549741976 instance=ExtResource("3_g1dw6")]
 position = Vector2(80, 0)
@@ -207,8 +208,10 @@ offset_bottom = 324.0
 
 [node name="Level" type="Label" parent="Camera2D/Gooey (GUI)" unique_id=1558608612]
 layout_mode = 0
-offset_right = 229.0
-offset_bottom = 23.0
+offset_left = 10.0
+offset_top = 35.0
+offset_right = 239.0
+offset_bottom = 58.0
 scale = Vector2(1.5, 1.5)
 text = "Level would mayhaps go here"
 

@@ -6,6 +6,7 @@ var yoyo_speed : float = 100.0
 var target_length : float = 80.0
 var health : float = 5.0
 @export var maxHealth : float = 5.0
+var dead = false
 var retract_speed : float = 1.0
 var invincible = false
 var extension_time : float = 0.0
@@ -14,13 +15,15 @@ var spinSpeed : float = 1.0
 @onready var anim_sprite = $AnimatedSprite2D
 @onready var rope = $YoyoPivot/Rope
 @onready var yoyo = $YoyoPivot/Yoyo
+var string_frames = [preload("res://Sprites/PlayerSprites/YoyoSprites/String1.png"), preload("res://Sprites/PlayerSprites/YoyoSprites/String2.png"), preload("res://Sprites/PlayerSprites/YoyoSprites/String3.png"), preload("res://Sprites/PlayerSprites/YoyoSprites/String4.png")]
+var string_time : float = 0.0
 func _ready() -> void:
 	GameState.player = self
 	anim_sprite.play("default")
 
 func _physics_process(delta: float) -> void:
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
+	if dead:
+		return
 	var direction := Input.get_vector("arrow_left", "arrow_right", "arrow_up", "arrow_down")
 	velocity = velocity.move_toward(direction * SPEED, ACCEL * delta)
 	$YoyoPivot.rotation += (yoyo_speed - 10 * min(extension_time,6.0)) * delta * PI/ 40
@@ -56,8 +59,9 @@ func _physics_process(delta: float) -> void:
 		retract_speed = 3.0
 	
 	yoyo.position.x = move_toward(yoyo.position.x, target_length, yoyo_speed * delta * retract_speed)
-	rope.scale.x = 0.62 * yoyo.position.x / 80.0
-	rope.position.x = 40 + 0.5 * (yoyo.position.x - 80.0)
+	rope.region_rect = Rect2(0, 0, yoyo.position.x / rope.scale.x, 5)
+	string_time += delta
+	rope.texture = string_frames[int(string_time * 10) % 4]
 	move_and_slide()
 	
 	var hits = $Hurtbox.get_overlapping_bodies()
@@ -69,6 +73,12 @@ func take_damage(damage: float) -> void:
 	if invincible:
 		return
 	health -= damage
+	if health <= 0:
+		dead = true
+		$YoyoPivot.visible = false
+		yoyo.set_deferred("monitoring", false)
+		anim_sprite.play("death")
+		return
 	print("took damage. health: ", health)
 	invincible = true
 	$Timer.start()
