@@ -26,9 +26,22 @@ func _physics_process(delta: float) -> void:
 	$YoyoPivot.rotation += (yoyo_speed - 10 * min(extension_time,6.0)) * delta * PI/ 40
 	$YoyoPivot.rotation = wrapf($YoyoPivot.rotation, 0, TAU)
 	spinSpeed = (yoyo_speed - 10 * min(extension_time,6.0))/yoyo_speed
-	anim_sprite.speed_scale = spinSpeed
-	if ($YoyoPivot.rotation > deg_to_rad(44) and $YoyoPivot.rotation < deg_to_rad(46)):
-		anim_sprite.set_frame_and_progress(7,0.5) #just in case there is floating point bullshittery
+	if direction != Vector2.ZERO:
+		anim_sprite.speed_scale = 1.0
+		if abs(direction.x) > abs(direction.y):
+			if direction.x > 0:
+				anim_sprite.play("walk_right")
+			else:
+				anim_sprite.play("walk_left")
+		else:
+			if direction.y > 0:
+				anim_sprite.play("walk_down")
+			else:
+				anim_sprite.play("walk_up")
+	else:
+		anim_sprite.play("default")
+		anim_sprite.pause()
+		anim_sprite.frame = (int($YoyoPivot.rotation / (TAU / 8)) + 6) % 8
 	if (is_extended and extension_time < 6.0):
 		extension_time += delta
 	elif (not is_extended and yoyo.position.x < 120.0):
