@@ -17,16 +17,32 @@ var spinSpeed : float = 1.0
 @onready var ropeCollide = $YoyoPivot/Rope/Collide
 @onready var yoyo = $YoyoPivot/Yoyo
 @onready var ropeShape = $YoyoPivot/Rope/Collide/CollisionShape2D
+@onready var musicPlayer = $MusicMaker
+@export var shop = CanvasLayer
 var string_frames = [preload("res://Sprites/PlayerSprites/YoyoSprites/String1.png"), preload("res://Sprites/PlayerSprites/YoyoSprites/String2.png"), preload("res://Sprites/PlayerSprites/YoyoSprites/String3.png"), preload("res://Sprites/PlayerSprites/YoyoSprites/String4.png")]
 var string_time : float = 0.0
+#signal closeShop
 func _ready() -> void:
 	GameState.player = self
 	GameState.level = 1
 	GameState.xp = 0
 	GameState.xp_to_level = 10
 	anim_sprite.play("default")
+	$MusicMaker2.stop()
+	$MusicMaker.play()
+	$MusicMaker3.stop()
+	shop.closeShop.connect(_close_menu)
+func _close_menu():
+	$MusicMaker.play($MusicMaker3.get_playback_position())
+	$MusicMaker3.stop()
 
 func _physics_process(delta: float) -> void:
+	if (GameState.inMenu):
+		if ($MusicMaker.playing):
+			$MusicMaker3.play($MusicMaker.get_playback_position())
+			$MusicMaker.stop()
+		
+		return
 	if dead and Input.is_action_just_pressed("restart"):
 		get_tree().reload_current_scene()
 		return
@@ -82,8 +98,8 @@ func _physics_process(delta: float) -> void:
 	for body in ropehits:
 		if yoyo.overlaps_body(body):
 			continue
-		if "enemies" in body.get_groups():
-			take_damage(2.0)
+		if "enemies" in body.get_groups() and target_length > yoyo.position.x - 10:
+			take_damage(1.0)
 	
 func take_damage(damage: float) -> void:
 	if invincible or dead:
@@ -94,6 +110,8 @@ func take_damage(damage: float) -> void:
 		$YoyoPivot.visible = false
 		yoyo.set_deferred("monitoring", false)
 		anim_sprite.play("death")
+		$MusicMaker2.play($MusicMaker.get_playback_position())
+		$MusicMaker.stop()
 		create_tween().tween_property(get_tree().current_scene.get_node("%DeathLabel"), "modulate:a", 1.0, 1.0)
 		return
 	print("took damage. health: ", health)

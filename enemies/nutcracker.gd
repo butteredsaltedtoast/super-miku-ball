@@ -1,6 +1,8 @@
 extends Enemy
 @export var projectile_scene : PackedScene
 func _on_shoot_timer_timeout() -> void:
+	if GameState.inMenu:
+		return
 	if GameState.player == null or GameState.player.dead:
 		return
 	var p = projectile_scene.instantiate()

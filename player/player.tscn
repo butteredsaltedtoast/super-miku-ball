@@ -33,6 +33,9 @@
 [ext_resource type="Texture2D" uid="uid://36bc2p3jsxqe" path="res://Sprites/PlayerSprites/WalkUp4.png" id="30_n0b8q"]
 [ext_resource type="Texture2D" uid="uid://cb0461iuit8w5" path="res://Sprites/PlayerSprites/YoyoSprites/String1.png" id="32_5ejfk"]
 [ext_resource type="PackedScene" uid="uid://cfypdyommw1kl" path="res://player/rope.tscn" id="34_jd2rm"]
+[ext_resource type="AudioStream" uid="uid://dtjxvgrffmat8" path="res://Audio/YoyoGame001.ogg" id="34_q28gw"]
+[ext_resource type="AudioStream" uid="uid://d28j4b0kf5k88" path="res://Audio/YoyoGameThemeMenu.ogg" id="35_q28gw"]
+[ext_resource type="AudioStream" uid="uid://kn0jsdo3ecly" path="res://Audio/YoyoGameThemeDead.ogg" id="36_ge24q"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_w4o6v"]
 animations = [{
@@ -204,5 +207,23 @@ shape = SubResource("RectangleShape2D_38vvf")
 
 [node name="Timer" type="Timer" parent="." unique_id=62535615]
 one_shot = true
+
+[node name="MusicMaker" type="AudioStreamPlayer2D" parent="." unique_id=319693286]
+stream = ExtResource("34_q28gw")
+autoplay = true
+max_distance = 2199.0
+parameters/looping = true
+
+[node name="MusicMaker3" type="AudioStreamPlayer2D" parent="." unique_id=1330990853]
+stream = ExtResource("35_q28gw")
+autoplay = true
+max_distance = 2199.0
+parameters/looping = true
+
+[node name="MusicMaker2" type="AudioStreamPlayer2D" parent="." unique_id=1721741991]
+stream = ExtResource("36_ge24q")
+autoplay = true
+max_distance = 2199.0
+parameters/looping = true
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

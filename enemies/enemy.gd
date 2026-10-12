@@ -8,6 +8,7 @@ var hp : float = maxHP
 var dmgCooldown : float = 0.3
 var cooldownTime : float = dmgCooldown
 func _physics_process(delta: float) -> void:
+	if GameState.inMenu: return
 	if GameState.player == null: return
 	var direction = global_position.direction_to(GameState.player.global_position)
 	if GameState.player.dead:
