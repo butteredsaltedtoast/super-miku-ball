@@ -29,9 +29,11 @@ func _physics_process(delta: float) -> void:
 func take_damage(damage: float, parent: Node2D, speed : float = 1.0) -> void:
 	if (cooldownTime == dmgCooldown):
 		hp -= damage
+		GameState.play_sfx("res://Audio/SFX/snd_enemy_hurt.mp3")
 		cooldownTime = 0.0
 		velocity += Vector2(cos(parent.rotation + 0.4)*(SPEED + 35)*speed,sin(parent.rotation + 0.4)*(SPEED + 35)*speed)
 	
 		if(hp <= 0):
 			GameState.add_xp(1)
+			GameState.play_sfx("res://Audio/SFX/snd_player_hurt.mp3")
 			queue_free()

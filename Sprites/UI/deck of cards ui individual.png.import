@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://87vjcuyx01q6"
-path="res://.godot/imported/YoyoDamage1.png-dd63825c219899b814a61046f858fba8.ctex"
+uid="uid://bi6h5732a44ap"
+path="res://.godot/imported/deck of cards ui individual.png-2de9c6e5227cb578203a565fa71fea93.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/UI/YoyoDamage1.png"
-dest_files=["res://.godot/imported/YoyoDamage1.png-dd63825c219899b814a61046f858fba8.ctex"]
+source_file="res://Sprites/UI/deck of cards ui individual.png"
+dest_files=["res://.godot/imported/deck of cards ui individual.png-2de9c6e5227cb578203a565fa71fea93.ctex"]
 
 [params]
 

@@ -13,6 +13,8 @@
 [ext_resource type="Script" uid="uid://c4myvjxb6btu6" path="res://levels/level_text.gd" id="7_lm0sa"]
 [ext_resource type="Texture2D" uid="uid://dnn7e8xnriyfp" path="res://Sprites/UI/ShopGUI.png" id="11_g4hhx"]
 [ext_resource type="Script" uid="uid://cooasx2yge8mt" path="res://levels/shop.gd" id="11_k6gdd"]
+[ext_resource type="Texture2D" uid="uid://bu67f4d7ykiad" path="res://Sprites/UI/refuse button, but slanted.png" id="14_5y8qy"]
+[ext_resource type="Texture2D" uid="uid://bi6h5732a44ap" path="res://Sprites/UI/deck of cards ui individual.png" id="15_dg7fx"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_21pgg"]
 texture = ExtResource("1_lx1v7")
@@ -94,7 +96,7 @@ script = ExtResource("5_ijwil")
 enemy_scenes = Array[PackedScene]([ExtResource("2_qpncq"), ExtResource("4_rjpa6")])
 
 [node name="Timer" type="Timer" parent="Spawner" unique_id=871362567]
-wait_time = 1.5
+wait_time = 3.0
 autostart = true
 
 [node name="Shop" type="CanvasLayer" parent="." unique_id=2132016490]
@@ -106,27 +108,45 @@ scale = Vector2(3, 3)
 texture = ExtResource("11_g4hhx")
 
 [node name="Card1" type="TextureButton" parent="Shop/ShopBG" unique_id=1842970741]
-offset_left = -123.33333
-offset_top = -37.000008
-offset_right = 41.66667
-offset_bottom = 183.0
+offset_left = -124.0
+offset_top = -37.0
+offset_right = -67.666664
+offset_bottom = 36.666664
+ignore_texture_size = true
 
-[node name="Card2" type="TextureButton" parent="Shop/ShopBG" unique_id=561339474]
-offset_left = -59.666656
-offset_top = -37.000008
-offset_right = 105.33334
-offset_bottom = 183.0
+[node name="Card2" type="TextureButton" parent="Shop/ShopBG" unique_id=1696664186]
+offset_left = -60.0
+offset_top = -37.33335
+offset_right = -3.6666641
+offset_bottom = 36.333305
+ignore_texture_size = true
 
-[node name="Card3" type="TextureButton" parent="Shop/ShopBG" unique_id=1228824009]
-offset_left = 4.3333435
-offset_top = -37.000008
-offset_right = 169.33334
-offset_bottom = 183.0
+[node name="Card3" type="TextureButton" parent="Shop/ShopBG" unique_id=541130941]
+offset_left = 4.0
+offset_top = -37.33336
+offset_right = 60.333336
+offset_bottom = 36.333298
+ignore_texture_size = true
 
-[node name="Card4" type="TextureButton" parent="Shop/ShopBG" unique_id=1428358583]
-offset_left = 69.0
-offset_top = -36.66667
-offset_right = 234.0
-offset_bottom = 183.33333
+[node name="Card4" type="TextureButton" parent="Shop/ShopBG" unique_id=1904305219]
+offset_left = 67.66669
+offset_top = -37.33336
+offset_right = 124.00002
+offset_bottom = 36.333298
+ignore_texture_size = true
+
+[node name="Refuse" type="TextureButton" parent="Shop/ShopBG" unique_id=1136573371]
+offset_left = 62.0
+offset_top = -95.333336
+offset_right = 162.0
+offset_bottom = -45.333336
+texture_normal = ExtResource("14_5y8qy")
+
+[node name="Deck" type="TextureButton" parent="Shop/ShopBG" unique_id=77718591]
+offset_left = -142.33333
+offset_top = -94.00001
+offset_right = -92.33333
+offset_bottom = -44.000008
+texture_normal = ExtResource("15_dg7fx")
 
 [connection signal="timeout" from="Spawner/Timer" to="Spawner" method="_on_timer_timeout"]

@@ -42,4 +42,9 @@ position = Vector2(0.41666698, 6.6666665)
 wait_time = 2.0
 autostart = true
 
+[node name="WarnTimer" type="Timer" parent="." index="3" unique_id=1527521006]
+wait_time = 0.4
+one_shot = true
+
 [connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]
+[connection signal="timeout" from="WarnTimer" to="." method="_on_warn_timer_timeout"]

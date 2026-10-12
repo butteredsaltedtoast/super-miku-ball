@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dwfu0il64s7ow"
-path="res://.godot/imported/YoyoDamage2.png-efd303c3137932319c6e10d79df9eb9d.ctex"
+uid="uid://lurcvhmk6ynu"
+path="res://.godot/imported/StringMax2.png-fc2521acbe57cb0b51a44a934910caa8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/UI/YoyoDamage2.png"
-dest_files=["res://.godot/imported/YoyoDamage2.png-efd303c3137932319c6e10d79df9eb9d.ctex"]
+source_file="res://Sprites/UI/StringMax2.png"
+dest_files=["res://.godot/imported/StringMax2.png-fc2521acbe57cb0b51a44a934910caa8.ctex"]
 
 [params]
 
