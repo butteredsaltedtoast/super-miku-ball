@@ -7,7 +7,11 @@ const SPEED : float = 100.0
 var hp : float = maxHP
 var dmgCooldown : float = 0.3
 var cooldownTime : float = dmgCooldown
+var dying = false
 func _physics_process(delta: float) -> void:
+	if dying: return
+	if $Sprite2D.animation == "hit" and not $Sprite2D.is_playing():
+		$Sprite2D.play("default")
 	if GameState.inMenu: return
 	if GameState.player == null: return
 	var direction = global_position.direction_to(GameState.player.global_position)
@@ -34,6 +38,17 @@ func take_damage(damage: float, parent: Node2D, speed : float = 1.0) -> void:
 		velocity += Vector2(cos(parent.rotation + 0.4)*(SPEED + 35)*speed,sin(parent.rotation + 0.4)*(SPEED + 35)*speed)
 	
 		if(hp <= 0):
+			dying = true
+			visible = true
+			remove_from_group("enemies")
+			$CollisionShape2D.set_deferred("disabled", true)
 			GameState.add_xp(1)
 			GameState.play_sfx("res://Audio/SFX/snd_player_hurt.mp3")
-			queue_free()
+			$Sprite2D.play("death")
+			$Sprite2D.animation_finished.connect(func():
+				var t = create_tween()
+				t.tween_property(self, "modulate:a", 0.0, 0.4)
+				t.tween_callback(queue_free)
+			)
+		else:
+			$Sprite2D.play("hit")

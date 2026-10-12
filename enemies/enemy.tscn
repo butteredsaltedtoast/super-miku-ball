@@ -2,12 +2,30 @@
 
 [ext_resource type="Script" uid="uid://bxpwgaf8lsfsu" path="res://enemies/enemy.gd" id="1_7frlh"]
 [ext_resource type="Texture2D" uid="uid://dw120ufnthmia" path="res://Sprites/EnemySprites/Clown1.png" id="2_07tka"]
+[ext_resource type="Texture2D" uid="uid://bn32ydts23vt1" path="res://Sprites/EnemySprites/ClownDeath1.png" id="2_uba7a"]
 [ext_resource type="Texture2D" uid="uid://b7i1mybo75nv7" path="res://Sprites/EnemySprites/Clown2.png" id="3_3t1x0"]
+[ext_resource type="Texture2D" uid="uid://bul8m6p42pcxr" path="res://Sprites/EnemySprites/ClownDeath2.png" id="3_28xqf"]
 [ext_resource type="Texture2D" uid="uid://ddqq5yxfiow2w" path="res://Sprites/EnemySprites/Clown3.png" id="4_epsnb"]
+[ext_resource type="Texture2D" uid="uid://ca4sw17wnlwsd" path="res://Sprites/EnemySprites/ClownDeath3.png" id="4_g67el"]
 [ext_resource type="Texture2D" uid="uid://dlotllcpvluxu" path="res://Sprites/EnemySprites/Clown4.png" id="5_4w5fm"]
+[ext_resource type="Texture2D" uid="uid://bq0b2ibstmwjk" path="res://Sprites/EnemySprites/ClownHit.png" id="9_ccbdt"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_o33cc"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_uba7a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_28xqf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_g67el")
+}],
+"loop": 0,
+"name": &"death",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("2_07tka")
@@ -24,6 +42,14 @@ animations = [{
 "loop": 1,
 "name": &"default",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_ccbdt")
+}],
+"loop": 0,
+"name": &"hit",
+"speed": 5.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7frlh"]
@@ -36,7 +62,10 @@ script = ExtResource("1_7frlh")
 [node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=836537040]
 scale = Vector2(2.1666667, 2.1666672)
 sprite_frames = SubResource("SpriteFrames_o33cc")
+animation = &"death"
 autoplay = "default"
+frame = 2
+frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1008037828]
 position = Vector2(7.5, 6)
