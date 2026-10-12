@@ -27,6 +27,8 @@ func _ready() -> void:
 	GameState.level = 1
 	GameState.xp = 0
 	GameState.xp_to_level = 10
+	for k in GameState.upgrades:
+		GameState.upgrades[k] = 0
 	anim_sprite.play("default")
 	$MusicMaker2.stop()
 	$MusicMaker.play()

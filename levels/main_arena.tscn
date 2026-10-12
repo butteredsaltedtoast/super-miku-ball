@@ -98,12 +98,35 @@ wait_time = 1.5
 autostart = true
 
 [node name="Shop" type="CanvasLayer" parent="." unique_id=2132016490]
-visible = false
 script = ExtResource("11_k6gdd")
 
 [node name="ShopBG" type="Sprite2D" parent="Shop" unique_id=1077250880]
 position = Vector2(576, 400)
 scale = Vector2(3, 3)
 texture = ExtResource("11_g4hhx")
+
+[node name="Card1" type="TextureButton" parent="Shop/ShopBG" unique_id=1842970741]
+offset_left = -123.33333
+offset_top = -37.000008
+offset_right = 41.66667
+offset_bottom = 183.0
+
+[node name="Card2" type="TextureButton" parent="Shop/ShopBG" unique_id=561339474]
+offset_left = -59.666656
+offset_top = -37.000008
+offset_right = 105.33334
+offset_bottom = 183.0
+
+[node name="Card3" type="TextureButton" parent="Shop/ShopBG" unique_id=1228824009]
+offset_left = 4.3333435
+offset_top = -37.000008
+offset_right = 169.33334
+offset_bottom = 183.0
+
+[node name="Card4" type="TextureButton" parent="Shop/ShopBG" unique_id=1428358583]
+offset_left = 69.0
+offset_top = -36.66667
+offset_right = 234.0
+offset_bottom = 183.33333
 
 [connection signal="timeout" from="Spawner/Timer" to="Spawner" method="_on_timer_timeout"]
