@@ -7,6 +7,7 @@ var level : int = 1
 var run_time: float = 0
 var upgrades = {"damage": 0, "size": 0, "speed": 0, "stretch": 0, "maxhp": 0, "cradle": 0, "loopdeloop": 0, "parry": 0, "walkthedog": 0}
 var max_upgrades = {"damage": 2, "size": 4, "speed": 4, "stretch" : 2, "maxhp": 5, "cradle": 1, "loopdeloop": 1, "parry": 1, "walkthedog": 1}
+var actives = []
 @export var UI : CanvasLayer
 signal updateLevel
 signal closeShop

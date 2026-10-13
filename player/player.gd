@@ -12,6 +12,10 @@ var invincible = false
 var extension_time : float = 0.0
 var is_extended = false
 var spinSpeed : float = 1.0
+var cooldowns = {}
+var dog_time : float = 0
+var facing : Vector2 = Vector2.RIGHT
+var cradle_time : float = 0
 @onready var anim_sprite = $AnimatedSprite2D
 @onready var rope = $YoyoPivot/Rope/Rope
 @onready var ropeCollide = $YoyoPivot/Rope/Collide
@@ -27,6 +31,7 @@ func _ready() -> void:
 	GameState.xp = 0
 	GameState.xp_to_level = 3
 	GameState.run_time = 0
+	GameState.actives = []
 	for k in GameState.upgrades:
 		GameState.upgrades[k] = 0
 	anim_sprite.play("default")
@@ -48,13 +53,27 @@ func _physics_process(delta: float) -> void:
 		return
 	elif dead:
 		return
+	for k in cooldowns:
+		cooldowns[k] = max(0.0, cooldowns[k] - delta)
+	if Input.is_action_just_pressed("primary") and GameState.actives.size() > 0:
+		use_active(GameState.actives[0])
+	if Input.is_action_just_pressed("secondary") and GameState.actives.size() > 1:
+		use_active(GameState.actives[1])
 	GameState.run_time += delta
 	yoyo_speed = 100 * (1 + 0.15 * GameState.upgrades["speed"])
 	yoyo.scale = Vector2.ONE * (1 + 0.2 * GameState.upgrades["size"])
 	maxHealth = 10.0 + 2.0 * GameState.upgrades["maxhp"]
 	var direction := Input.get_vector("arrow_left", "arrow_right", "arrow_up", "arrow_down")
+	if direction != Vector2.ZERO:
+		facing = direction
 	velocity = velocity.move_toward(direction * SPEED, ACCEL * delta)
-	$YoyoPivot.rotation += (yoyo_speed - 10 * min(extension_time,6.0)) * delta * PI/ 40
+	if dog_time > 0:
+		$YoyoPivot.rotation = facing.angle()
+	elif cradle_time > 0:
+		cradle_time -= delta
+		$YoyoPivot.rotation = facing.angle() + sin(GameState.run_time * 10) * 0.6
+	else:
+		$YoyoPivot.rotation += (yoyo_speed - 10 * min(extension_time,6.0)) * delta * PI/ 40
 	$YoyoPivot.rotation = wrapf($YoyoPivot.rotation, 0, TAU)
 	spinSpeed = (yoyo_speed - 10 * min(extension_time,6.0))/yoyo_speed
 	if yoyo.position.x == 80.0 and direction != Vector2.ZERO:
@@ -77,7 +96,7 @@ func _physics_process(delta: float) -> void:
 		extension_time += delta
 	elif (not is_extended and yoyo.position.x < 120.0):
 		extension_time = clamp(extension_time - 10 * delta, 0.0, 6.0)
-	if Input.is_action_pressed("primary"):
+	if Input.is_action_pressed("extend"):
 		target_length = 100.0 + health * [20, 26, 32][GameState.upgrades["stretch"]]
 		is_extended = true
 		retract_speed = 1.0
@@ -85,7 +104,10 @@ func _physics_process(delta: float) -> void:
 		target_length = 80.0
 		is_extended = false
 		retract_speed = 3.0
-	
+	if dog_time > 0.0:
+		dog_time -= delta
+		target_length = 100 + health * 40 if dog_time > 0.2 else 80.0
+		retract_speed = 8.0
 	yoyo.position.x = move_toward(yoyo.position.x, target_length, yoyo_speed * delta * retract_speed * health / 4)
 	rope.region_rect = Rect2(0, 0, yoyo.position.x / rope.scale.x, 5)
 	ropeShape.shape.size = Vector2((yoyo.position.x - 30) / 3, 5)
@@ -126,6 +148,20 @@ func take_damage(damage: float, from_string := false) -> void:
 		GameState.play_sfx("res://Audio/SFX/snd_hurt.mp3")
 	invincible = true
 	$Timer.start()
+	
+func use_active(active: String):
+	if cooldowns.get(active, 0) > 0:
+		return
+	match active:
+		"loopdeloop":
+			pass
+		"walkthedog":
+			dog_time = 0.4
+			cooldowns[active] = 4
+		"cradle" :
+			cradle_time = 3
+			cooldowns[active] = 8
+	print("used", active)
 
 func _on_timer_timeout() -> void:
 	invincible = false

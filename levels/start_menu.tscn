@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dd2yp3my7bdkp" path="res://Sprites/UI/MenuArt.png" id="1_nl3ga"]
 [ext_resource type="Texture2D" uid="uid://b07afrncvnpgs" path="res://Sprites/UI/menu tileset.png" id="1_nt4di"]
 [ext_resource type="Texture2D" uid="uid://to6eel8pmn8o" path="res://Sprites/UI/menu start button.png" id="4_hv5yl"]
-[ext_resource type="Texture2D" uid="uid://db13et24df1dw" path="res://Sprites/UI/menu exit button.png" id="5_orc46"]
+[ext_resource type="Texture2D" uid="uid://prt4y5y7khwx" path="res://Sprites/UI/pixil-frame-0_21.png" id="5_eeffy"]
 
 [node name="StartMenu" type="Control" unique_id=807453365]
 layout_mode = 3
@@ -49,4 +49,4 @@ offset_top = 400.0
 offset_right = 696.0
 offset_bottom = 450.0
 scale = Vector2(4, 4)
-texture_normal = ExtResource("5_orc46")
+texture_normal = ExtResource("5_eeffy")

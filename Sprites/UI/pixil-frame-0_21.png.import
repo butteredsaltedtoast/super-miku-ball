@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://db13et24df1dw"
-path="res://.godot/imported/menu exit button.png-861f82f311f0cc6f7c42ae6ae98099f6.ctex"
+uid="uid://prt4y5y7khwx"
+path="res://.godot/imported/pixil-frame-0_21.png-c7ff2432f5d50e86027034dd23045ab3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/UI/menu exit button.png"
-dest_files=["res://.godot/imported/menu exit button.png-861f82f311f0cc6f7c42ae6ae98099f6.ctex"]
+source_file="res://Sprites/UI/pixil-frame-0_21.png"
+dest_files=["res://.godot/imported/pixil-frame-0_21.png-c7ff2432f5d50e86027034dd23045ab3.ctex"]
 
 [params]
 

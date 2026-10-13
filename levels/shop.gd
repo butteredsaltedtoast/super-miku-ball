@@ -28,8 +28,11 @@ func _onShopOpen(level: int):
 	create_tween().tween_property($ShopBG, "position", shop_target, 0.3).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 	var pool = []
 	for k in GameState.upgrades:
-		if GameState.upgrades[k] < GameState.max_upgrades[k]:
-			pool.append(k)
+		if GameState.upgrades[k] >= GameState.max_upgrades[k]:
+			continue
+		if GameState.max_upgrades[k] == 1 and GameState.actives.size() >= 2:
+			continue
+		pool.append(k)
 	pool.shuffle()
 	cantake = pool.slice(0, 4)
 	for k in 4:
@@ -51,6 +54,8 @@ func _close_shop():
 func _on_card_picked(k: int):
 	GameState.play_sfx("res://Audio/SFX/snd_shop_purchase.mp3")
 	GameState.upgrades[cantake[k]] += 1
+	if GameState.max_upgrades[cantake[k]] == 1:
+		GameState.actives.append(cantake[k])
 	if cantake[k] == "maxhp":
 		GameState.player.health += 2
 	_close_shop()
