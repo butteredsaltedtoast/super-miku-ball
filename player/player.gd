@@ -34,7 +34,6 @@ func _ready() -> void:
 	GameState.xp_to_level = 3
 	GameState.run_time = 0
 	GameState.actives = []
-	GameState.actives = ["parry", "walkthedog"]
 	for k in GameState.upgrades:
 		GameState.upgrades[k] = 0
 	anim_sprite.play("default")
