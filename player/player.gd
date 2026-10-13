@@ -16,6 +16,7 @@ var cooldowns = {}
 var dog_time : float = 0
 var facing : Vector2 = Vector2.RIGHT
 var cradle_time : float = 0
+var loop_time : float = 0
 @onready var anim_sprite = $AnimatedSprite2D
 @onready var rope = $YoyoPivot/Rope/Rope
 @onready var ropeCollide = $YoyoPivot/Rope/Collide
@@ -55,6 +56,7 @@ func _physics_process(delta: float) -> void:
 		return
 	for k in cooldowns:
 		cooldowns[k] = max(0.0, cooldowns[k] - delta)
+	loop_time = max(0.0, loop_time - delta)
 	if Input.is_action_just_pressed("primary") and GameState.actives.size() > 0:
 		use_active(GameState.actives[0])
 	if Input.is_action_just_pressed("secondary") and GameState.actives.size() > 1:
@@ -73,7 +75,7 @@ func _physics_process(delta: float) -> void:
 		cradle_time -= delta
 		$YoyoPivot.rotation = facing.angle() + sin(GameState.run_time * 10) * 0.6
 	else:
-		$YoyoPivot.rotation += (yoyo_speed - 10 * min(extension_time,6.0)) * delta * PI/ 40
+		$YoyoPivot.rotation += (yoyo_speed - 10 * min(extension_time,6.0)) * delta * PI/ 40 * (3.0 if loop_time > 0 else 1.0)
 	$YoyoPivot.rotation = wrapf($YoyoPivot.rotation, 0, TAU)
 	spinSpeed = (yoyo_speed - 10 * min(extension_time,6.0))/yoyo_speed
 	if yoyo.position.x == 80.0 and direction != Vector2.ZERO:
@@ -154,7 +156,8 @@ func use_active(active: String):
 		return
 	match active:
 		"loopdeloop":
-			pass
+			loop_time = 2.0
+			cooldowns[active] = 6
 		"walkthedog":
 			dog_time = 0.4
 			cooldowns[active] = 4
