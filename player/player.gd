@@ -17,6 +17,7 @@ var dog_time : float = 0
 var facing : Vector2 = Vector2.RIGHT
 var cradle_time : float = 0
 var loop_time : float = 0
+var parry_time : float = 0
 @onready var anim_sprite = $AnimatedSprite2D
 @onready var rope = $YoyoPivot/Rope/Rope
 @onready var ropeCollide = $YoyoPivot/Rope/Collide
@@ -33,6 +34,7 @@ func _ready() -> void:
 	GameState.xp_to_level = 3
 	GameState.run_time = 0
 	GameState.actives = []
+	GameState.actives = ["parry", "walkthedog"]
 	for k in GameState.upgrades:
 		GameState.upgrades[k] = 0
 	anim_sprite.play("default")
@@ -57,6 +59,8 @@ func _physics_process(delta: float) -> void:
 	for k in cooldowns:
 		cooldowns[k] = max(0.0, cooldowns[k] - delta)
 	loop_time = max(0.0, loop_time - delta)
+	parry_time = max(0.0, parry_time - delta)
+	yoyo.modulate = Color(3, 3, 3) if parry_time > 0 else Color.WHITE
 	if Input.is_action_just_pressed("primary") and GameState.actives.size() > 0:
 		use_active(GameState.actives[0])
 	if Input.is_action_just_pressed("secondary") and GameState.actives.size() > 1:
@@ -69,7 +73,9 @@ func _physics_process(delta: float) -> void:
 	if direction != Vector2.ZERO:
 		facing = direction
 	velocity = velocity.move_toward(direction * SPEED, ACCEL * delta)
-	if dog_time > 0:
+	if parry_time > 0:
+		$YoyoPivot.rotation += TAU / 0.35 * delta
+	elif dog_time > 0:
 		$YoyoPivot.rotation = facing.angle()
 	elif cradle_time > 0:
 		cradle_time -= delta
@@ -126,6 +132,8 @@ func _physics_process(delta: float) -> void:
 	for body in ropehits:
 		if not body.is_in_group("enemies"):
 			continue
+		if parry_time > 0:
+			continue
 		if yoyo.overlaps_body(body) or body.cooldownTime < body.dmgCooldown:
 			continue
 		if target_length > yoyo.position.x - 10:
@@ -161,9 +169,12 @@ func use_active(active: String):
 		"walkthedog":
 			dog_time = 0.4
 			cooldowns[active] = 4
-		"cradle" :
+		"cradle":
 			cradle_time = 3
 			cooldowns[active] = 8
+		"parry":
+			parry_time = 0.35
+			cooldowns[active] = 10.0
 	print("used", active)
 
 func _on_timer_timeout() -> void:
