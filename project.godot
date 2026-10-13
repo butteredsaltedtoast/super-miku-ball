@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="super-miku-ball"
-run/main_scene="uid://s1pwgee42kcb"
+run/main_scene="uid://wm0drqvferv6"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -21,8 +21,9 @@ GameState="*uid://byudh8otpd5nc"
 
 [display]
 
+window/size/window_width_override=960
+window/size/window_height_override=540
 window/stretch/mode="canvas_items"
-window/stretch/aspect="expand"
 
 [editor_plugins]
 

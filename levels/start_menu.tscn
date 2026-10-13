@@ -1,0 +1,52 @@
+[gd_scene format=3 uid="uid://wm0drqvferv6"]
+
+[ext_resource type="Script" uid="uid://dteikhpdgvp3i" path="res://levels/start_menu.gd" id="1_eeffy"]
+[ext_resource type="Texture2D" uid="uid://dd2yp3my7bdkp" path="res://Sprites/UI/MenuArt.png" id="1_nl3ga"]
+[ext_resource type="Texture2D" uid="uid://b07afrncvnpgs" path="res://Sprites/UI/menu tileset.png" id="1_nt4di"]
+[ext_resource type="Texture2D" uid="uid://to6eel8pmn8o" path="res://Sprites/UI/menu start button.png" id="4_hv5yl"]
+[ext_resource type="Texture2D" uid="uid://db13et24df1dw" path="res://Sprites/UI/menu exit button.png" id="5_orc46"]
+
+[node name="StartMenu" type="Control" unique_id=807453365]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_eeffy")
+
+[node name="Background" type="TextureRect" parent="." unique_id=1631044255]
+modulate = Color(0.72156864, 0.72156864, 0.72156864, 1)
+layout_mode = 1
+offset_right = 144.0
+offset_bottom = 81.0
+scale = Vector2(8, 8)
+texture = ExtResource("1_nt4di")
+stretch_mode = 1
+
+[node name="TitleArt" type="TextureRect" parent="." unique_id=762720748]
+layout_mode = 0
+offset_left = 76.0
+offset_top = 60.0
+offset_right = 326.0
+offset_bottom = 140.0
+scale = Vector2(4, 4)
+texture = ExtResource("1_nl3ga")
+
+[node name="StartButton" type="TextureButton" parent="." unique_id=420952605]
+layout_mode = 0
+offset_left = 156.0
+offset_top = 400.0
+offset_right = 256.0
+offset_bottom = 450.0
+scale = Vector2(4, 4)
+texture_normal = ExtResource("4_hv5yl")
+
+[node name="ExitButton" type="TextureButton" parent="." unique_id=1186608125]
+layout_mode = 0
+offset_left = 596.0
+offset_top = 400.0
+offset_right = 696.0
+offset_bottom = 450.0
+scale = Vector2(4, 4)
+texture_normal = ExtResource("5_orc46")
